@@ -1,117 +1,266 @@
-# Lab-Assignment-5-AI-Cyber-Security
-# Explainable and Privacy-Aware AI Threat Alert
+# Mini AI Cybersecurity Assistant
 
-## 📌 Project Overview
+## 🔐 Project Overview
 
-This project demonstrates how Artificial Intelligence (AI) can be used in cybersecurity to detect potentially suspicious login activities while maintaining user privacy and providing explainable predictions.
+The **Mini AI Cybersecurity Assistant** is an integrated AI-based cybersecurity prototype developed using Python and Google Colab.
 
-A **Decision Tree Classifier** is used to classify login activities as `Normal` or `Suspicious`. The system also calculates prediction confidence, explains feature importance, performs sensitivity analysis, masks sensitive information, and generates responsible security alerts.
+The project combines rule-based threat detection, Machine Learning, Deep Learning, Explainable AI (XAI), and privacy-aware security practices to identify potentially suspicious messages and login activities.
 
-The project emphasizes explainable AI (XAI), privacy protection, and human-in-the-loop decision-making.
+The assistant analyzes sample messages for phishing, malware, and ransomware indicators while simultaneously evaluating login behavior using a Decision Tree and a small Neural Network.
 
-## 🎯 Objectives
+It generates an integrated security assessment by comparing model predictions, explaining suspicious activities, masking sensitive information, assigning risk levels, and recommending safe actions with human verification.
 
-- Detect potentially suspicious login activities using Machine Learning.
-- Generate predictions with confidence scores.
-- Identify important features influencing model decisions.
-- Perform controlled sensitivity analysis.
-- Protect sensitive information through data masking.
-- Generate security alerts with severity levels and recommended actions.
-- Ensure human review before taking high-risk security actions.
+## 🎯 Project Objectives
+
+- Recognize common cybersecurity threats using AI.
+- Clean and anonymize message and login-activity data.
+- Implement a rule-based threat detection system.
+- Use a Decision Tree for suspicious login detection.
+- Implement a small Neural Network and compare its predictions.
+- Explain predictions using keywords, feature importance, and numerical reasons.
+- Apply privacy protection and risk assessment.
+- Generate responsible security alerts.
+- Include human review for high-risk, conflicting, or low-confidence predictions.
 
 ## 🛠️ Technologies Used
 
 | Technology | Purpose |
 |---|---|
 | Python | Core programming language |
-| Pandas | Data manipulation and analysis |
+| Google Colab | Development environment |
+| Pandas | Data manipulation |
+| NumPy | Numerical operations |
+| Scikit-learn | Decision Tree and preprocessing |
+| TensorFlow / Keras | Neural Network implementation |
 | Matplotlib | Data visualization |
-| Scikit-learn | Machine Learning model |
-| Decision Tree Classifier | Login activity classification |
-| Google Colab / Jupyter Notebook | Development environment |
+| Machine Learning | Login threat classification |
+| Explainable AI | Prediction interpretation |
 
-## 📊 Dataset Description
+## 🏗️ System Architecture
 
-The model uses four numerical features to analyze login activities:
+The project consists of six major stages:
+
+1. **Input and Privacy Module**
+   - Accepts a sample message and login activity.
+   - Cleans input data.
+   - Masks sensitive identifiers such as email addresses, IP addresses, and account IDs.
+
+2. **Rule-Based Threat Detection**
+   - Checks messages for suspicious keywords.
+   - Identifies phishing, malware, and ransomware indicators.
+   - Generates matched keywords and a threat score.
+
+3. **Decision Tree Classifier**
+   - Analyzes numerical login activity.
+   - Predicts Normal or Suspicious behavior.
+   - Calculates prediction confidence.
+
+4. **Neural Network**
+   - Processes scaled numerical login features.
+   - Predicts Normal or Suspicious activity.
+   - Generates a prediction probability.
+
+5. **Explainability Module**
+   - Displays matched threat keywords.
+   - Identifies important login features.
+   - Provides numerical and threshold-based explanations.
+
+6. **Risk and Response Module**
+   - Combines outputs from all detection modules.
+   - Assigns Low, Medium, or High risk.
+   - Recommends safe actions.
+   - Requests human review when necessary.
+
+## 📊 Login Activity Features
+
+The numerical login record contains four features:
 
 | Feature | Description |
 |---|---|
 | `failed_logins` | Number of unsuccessful login attempts |
-| `login_hour` | Hour at which the login occurred |
-| `new_device` | Indicates whether the login is from a new device (0 or 1) |
+| `login_hour` | Hour of login activity |
+| `new_device` | Indicates whether a new device is being used |
 | `download_mb` | Amount of data downloaded in MB |
 
-**Target Variable:**
-- `Normal` – Login activity considered normal.
-- `Suspicious` – Login activity considered potentially suspicious.
-
-**Note:** This implementation uses a small illustrative training dataset because the original Lab 2 dataset was not included. Replace it with the original dataset when available for continuity and more meaningful evaluation.
-
-## ⚙️ Project Workflow
-
-1. **Data Preparation:** Prepare login activity records using the four numerical features.
-2. **Model Training:** Train a Decision Tree Classifier with a maximum depth of 4.
-3. **Baseline Predictions:** Classify five sample login records and calculate prediction confidence.
-4. **Feature Importance:** Identify and visualize the features that contribute to model decisions.
-5. **Sensitivity Analysis:** Change `failed_logins` from 2 to 8 while keeping other features fixed and compare predictions.
-6. **Privacy Masking:** Mask account IDs and IP addresses before displaying records.
-7. **Responsible Alert Generation:** Generate alerts with severity, reasons, recommended actions, and human-review status.
+The machine-learning and deep-learning modules use these features to identify potentially suspicious login behavior.
 
 ## 🔍 Key Features
 
-### 1. Login Threat Detection
-Uses a Decision Tree model to classify login activity into Normal and Suspicious categories.
+### 1. Rule-Based Threat Detection
 
-### 2. Prediction Confidence
-Calculates the maximum predicted class probability to indicate the model's confidence in each prediction.
+Analyzes messages using predefined suspicious keywords and identifies possible:
 
-### 3. Explainable AI
-Displays feature importance through a labelled bar chart to help understand which inputs influence the model.
+- Phishing attacks
+- Malware indicators
+- Ransomware indicators
 
-### 4. Sensitivity Analysis
-Tests how changing the number of failed login attempts affects the model's prediction and confidence.
+The module returns a threat category, matched keywords, and keyword-based score.
 
-### 5. Privacy Protection
-Masks sensitive identifiers:
-- IP addresses: `192.168.10.24` → `192.168.xxx.xxx`
-- Account IDs: `ACC-1001` → `ACC-1***01`
+### 2. Machine Learning – Decision Tree
 
-### 6. Responsible Security Alerts
-Generates alerts containing:
-- Severity level
-- Reason for the alert
-- Recommended security action
-- Human-review requirement
+Uses a Decision Tree classifier to analyze login activity and classify it into:
 
-## 🚨 Alert Severity Levels
+- Normal
+- Suspicious
 
-| Severity | Condition | Recommended Action |
+The model also provides prediction confidence and feature importance.
+
+### 3. Deep Learning – Neural Network
+
+Implements a small pre-designed Neural Network using TensorFlow/Keras.
+
+- Uses scaled numerical features.
+- Produces prediction probabilities.
+- Classifies login activity using a probability threshold of 0.50.
+
+### 4. Model Comparison
+
+Compares the outputs of three detection approaches:
+
+- Rule-Based Detector
+- Decision Tree Classifier
+- Neural Network
+
+The results are displayed together to provide an integrated security assessment.
+
+### 5. Explainable AI (XAI)
+
+Provides understandable reasons behind predictions through:
+
+- Matched suspicious keywords.
+- Feature importance.
+- Threshold-based explanations.
+- Numerical login activity analysis.
+
+### 6. Privacy Protection
+
+Protects sensitive information by masking:
+
+- Email addresses
+- IP addresses
+- Account IDs
+
+Only synthetic or sanitized data should be used.
+
+### 7. Risk Assessment and Security Alerts
+
+Assigns one of three risk categories:
+
+| Risk Level | Interpretation |
+|---|---|
+| Low | Activity appears normal |
+| Medium | Potential threat or uncertain prediction |
+| High | Strong indication of suspicious activity |
+
+### 8. Human-in-the-Loop Security
+
+Human review is required when:
+
+- The risk level is High.
+- Different detection models produce conflicting results.
+- Prediction confidence is low.
+
+The system provides decision support rather than automatically taking punitive security actions.
+
+## 🔄 Integrated Workflow
+
+```text
+       Sample Message + Login Activity
+                     |
+                     v
+             Input & Privacy
+                     |
+                     v
+             Data Cleaning
+                     |
+          +----------+----------+
+          |          |          |
+          v          v          v
+       Rule-Based  Decision   Neural
+       Detection    Tree     Network
+          |          |          |
+          +----------+----------+
+                     |
+                     v
+             Model Comparison
+                     |
+                     v
+              Explainability
+                     |
+                     v
+              Risk Assessment
+                     |
+                     v
+              Safe Action
+                     |
+                     v
+               Human Review
+                     |
+                     v
+              Final AI Alert
+```
+
+## 🧪 Demonstration Scenarios
+
+The project is designed to test five scenarios:
+
+| Scenario | Test Case | Expected Interpretation |
 |---|---|---|
-| High | Model predicts Suspicious | Verify, contain if required, and report |
-| Medium | Non-suspicious prediction with confidence below 0.70 | Send for analyst review |
-| Low | Normal prediction with sufficient confidence | Continue normal monitoring |
+| 1 | Normal message and normal login | Low risk; human review usually not required |
+| 2 | Urgent account-verification message | Phishing indicator; Medium/High risk |
+| 3 | Repeated failed logins on a new device | Suspicious numeric result; High risk |
+| 4 | Large download at an unusual time | Alert with numerical explanation |
+| 5 | Conflicting or low-confidence predictions | Human review required |
 
-**Important:** High- and Medium-severity alerts require human review. The system does not automatically block accounts or punish users.
+## 📈 Expected Outputs
+
+After executing the notebook, the project should generate:
+
+- Threat category and matched keyword results.
+- Decision Tree predictions and confidence.
+- Neural Network predictions and probabilities.
+- Combined model comparison table.
+- Feature-importance visualization.
+- Risk/category chart.
+- Masked message and login information.
+- Final integrated security alert.
+- Recommended safe actions.
+- Human-review status.
 
 ## 📂 Project Structure
 
 ```text
-Explainable-Privacy-Aware-AI-Threat-Alert/
+Mini-AI-Cybersecurity-Assistant/
 │
-├── Lab_4_Explainable_Privacy_Aware_AI_Threat_Alert.ipynb
+├── Mini_AI_Cybersecurity_Assistant.ipynb
+│
+├── datasets/
+│   ├── messages.csv
+│   └── login_activity.csv
+│
+├── outputs/
+│   ├── combined_results.csv
+│   ├── risk_category_chart.png
+│   └── feature_importance.png
+│
+├── screenshots/
 │
 └── README.md
 ```
+
+*Note: The folder and filenames above are a suggested repository structure. Use the actual filenames generated by your notebook.*
 
 ## 🚀 How to Run the Project
 
 ### Option 1: Google Colab
 
-1. Download or clone this repository.
+1. Clone or download this GitHub repository.
 2. Open [Google Colab](https://colab.research.google.com/).
-3. Upload the `.ipynb` notebook.
-4. Run all cells sequentially.
-5. Review the prediction tables, feature-importance chart, sensitivity results, masked records, and generated alerts.
+3. Upload the project notebook.
+4. Upload the required CSV datasets.
+5. Execute all notebook cells sequentially.
+6. Test all five demonstration scenarios.
+7. Review the final prediction table, charts, and security alerts.
 
 ### Option 2: Run Locally
 
@@ -121,7 +270,7 @@ Explainable-Privacy-Aware-AI-Threat-Alert/
 git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
 ```
 
-**Step 2: Navigate to the project directory**
+**Step 2: Navigate to the project**
 
 ```bash
 cd YOUR-REPOSITORY
@@ -130,7 +279,7 @@ cd YOUR-REPOSITORY
 **Step 3: Install dependencies**
 
 ```bash
-pip install pandas matplotlib scikit-learn jupyter
+pip install pandas numpy matplotlib scikit-learn tensorflow jupyter
 ```
 
 **Step 4: Launch Jupyter Notebook**
@@ -139,51 +288,53 @@ pip install pandas matplotlib scikit-learn jupyter
 jupyter notebook
 ```
 
-**Step 5:** Open `Lab_4_Explainable_Privacy_Aware_AI_Threat_Alert.ipynb` and run all cells.
+**Step 5:** Open the notebook and execute all cells.
 
-## 📈 Expected Outputs
+## 📋 Project Deliverables
 
-After running the notebook, the following outputs are generated:
+The capstone assignment includes the following deliverables:
 
-- Decision Tree model training confirmation.
-- Baseline login prediction and confidence table.
-- Lowest-confidence record.
-- Feature-importance table and visualization.
-- Before-and-after sensitivity analysis.
-- Masked account IDs and IP addresses.
-- Privacy and responsible-use rules.
-- Final security alert table.
-- Human-review recommendations.
+- Completed and executed Google Colab notebook.
+- Two supplied CSV datasets.
+- One final combined result table.
+- Risk/category chart.
+- Feature-importance chart.
+- Results for all five demonstration scenarios.
+- Two-to-three-page project report.
+- Five-slide presentation.
+- One-page responsible-use and human-review checklist.
+- Individual contribution statement for team submissions.
 
 ## ⚠️ Limitations
 
-- The project uses a small illustrative dataset.
-- The Decision Tree model may not generalize to real-world cybersecurity environments.
-- Prediction confidence does not guarantee prediction correctness.
-- Feature importance does not establish causation.
-- Real-world deployment requires larger, representative datasets and further validation.
+- The prototype is designed for educational purposes.
+- Model performance depends on the quality and quantity of training data.
+- Prediction confidence does not guarantee correctness.
+- Rule-based detection may generate false positives.
+- Neural Network and Decision Tree predictions may disagree.
+- The prototype is not intended to replace professional cybersecurity monitoring systems.
 
-This project is an educational prototype and should not be used as a standalone production security system.
+## 🔒 Privacy and Responsible AI
 
-## 🔐 Privacy and Responsible AI
+This project follows responsible cybersecurity practices:
 
-The project follows these responsible-use principles:
+- Use only supplied synthetic or sanitized datasets.
+- Do not upload institutional confidential data to Google Colab.
+- Mask sensitive identifiers in screenshots, charts, and exported files.
+- Do not open suspicious links or execute malware.
+- Do not scan networks or test live accounts.
+- Treat model predictions as decision-support information.
+- Require authorized human verification before serious security actions.
 
-- Mask sensitive identifiers before displaying or exporting data.
-- Use sanitized data for experimentation.
-- Restrict access to unmasked records.
-- Require human review for high-risk alerts.
-- Avoid automatic punishment or account blocking based solely on AI predictions.
-
-## 🎓 Project Information
+## 🎓 Academic Information
 
 **Course:** ENSP355 – AI in Cyber Security  
-**Lab:** Lab 4 – Explainable and Privacy-Aware AI Threat Alert  
-**Programme:** B.Tech CSE (Core)  
-**Platform:** Python / Google Colab
-
----
+**Project:** Capstone – Mini AI Cybersecurity Assistant  
+**Academic Year:** 2026–27  
+**Platform:** Google Colab / Python  
+**University:** K.R. Mangalam University  
+**School:** School of Engineering & Technology
 
 ## 📜 License
 
-This project is intended for educational and academic purposes. You may modify and extend it for learning and experimentation.
+This project is intended for educational and academic purposes. It may be modified and extended for learning, research, and experimentation.
